@@ -29,22 +29,34 @@ export default function Navbar() {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             <a 
-              href="#calculator" 
+              href="/#calculator" 
               className="text-foreground/80 hover:text-primary transition-colors duration-200 font-medium"
             >
               Calculator
             </a>
             <a 
-              href="#how-to" 
+              href="/#how-to" 
               className="text-foreground/80 hover:text-primary transition-colors duration-200 font-medium"
             >
               How to Use
             </a>
             <a 
-              href="#reviews" 
+              href="/#reviews" 
               className="text-foreground/80 hover:text-primary transition-colors duration-200 font-medium"
             >
               Reviews
+            </a>
+            <a 
+              href="/faqs" 
+              className="text-foreground/80 hover:text-primary transition-colors duration-200 font-medium"
+            >
+              FAQs
+            </a>
+            <a 
+              href="/changelog" 
+              className="text-foreground/80 hover:text-primary transition-colors duration-200 font-medium"
+            >
+              Changelog
             </a>
           </div>
 

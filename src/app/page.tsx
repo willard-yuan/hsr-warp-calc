@@ -93,12 +93,15 @@ function Page() {
     });
     setSuccessRate(res);
 
-    // Scroll to the bottom of the page after calculation
+    // Scroll to the results section after calculation
     setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
+      const resultsElement = document.getElementById('results-section');
+      if (resultsElement) {
+        resultsElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
     }, 100);
   }
 
@@ -129,14 +132,33 @@ function Page() {
       
       {/* Calculator Section */}
       <section id="calculator" className="py-20 bg-gradient-to-b from-background to-muted/20">
-        <div className="container max-w-3xl p-6 mx-auto space-y-8">
-          {/* Main Card */}
-          <Card className="shadow-2xl bg-card/50 border-border backdrop-blur-xl">
-          <CardContent className="space-y-8">
+        <div className="container max-w-5xl p-6 mx-auto space-y-8">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                Gacha Calculator
+              </span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Calculate your probability of getting desired characters and weapons with our advanced simulation engine
+            </p>
+          </div>
+
+          {/* Main Calculator Card */}
+          <Card className="shadow-2xl bg-card/50 border-border backdrop-blur-xl overflow-hidden">
+          <CardContent className="space-y-8 p-8">
+            {/* Game Selection Header */}
+            <div className="text-center pb-6 border-b border-border/50">
+              <h3 className="text-2xl font-semibold mb-2 text-foreground">Choose Your Game</h3>
+              <p className="text-muted-foreground">Select the game you want to calculate probabilities for</p>
+            </div>
+
             {/* Game Selection */}
-            <div className="space-y-3 ">
-              <Label className="flex items-center gap-2 font-medium text-slate-200">
-                Select Game
+            <div className="space-y-4">
+              <Label className="text-lg font-medium text-foreground flex items-center gap-2">
+                <span className="w-2 h-2 bg-primary rounded-full"></span>
+                Game Selection
               </Label>
               <Select
                 value={selectedGame.id}
@@ -144,15 +166,15 @@ function Page() {
                   handleGameChange(v);
                 }}
               >
-                <SelectTrigger className="cursor-pointer w-full !h-12 transition-colors text-slate-100 bg-slate-800/50 border-slate-600 hover:border-slate-500">
+                <SelectTrigger className="cursor-pointer w-full h-14 transition-all duration-200 text-foreground bg-background border-2 border-border hover:border-primary/50 focus:border-primary">
                   <SelectValue placeholder="Choose your game" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-600 cursor-pointer">
+                <SelectContent className="bg-background border-border cursor-pointer">
                   {GAMES.map((game, i) => (
                     <SelectItem
                       key={i}
                       value={game.id}
-                      className="text-slate-100 focus:bg-slate-700 focus:text-slate-300 cursor-pointer "
+                      className="text-foreground focus:bg-muted focus:text-foreground cursor-pointer py-3"
                     >
                       <div className="flex items-center gap-3">
                         <Image
@@ -160,21 +182,21 @@ function Page() {
                           alt="Icon"
                           width={160}
                           height={160}
-                          className={`w-6 h-6 rounded-full `}
-                        ></Image>
-                        {game.name}
+                          className="w-8 h-8 rounded-full border-2 border-border"
+                        />
+                        <span className="font-medium">{game.name}</span>
                       </div>
                     </SelectItem>
                   ))}
                   <SelectItem
                     value={"custom"}
-                    className="text-slate-100 focus:bg-slate-700 focus:text-slate-300 cursor-pointer "
+                    className="text-foreground focus:bg-muted focus:text-foreground cursor-pointer py-3"
                   >
                     <div className="flex items-center gap-3">
-                      <Settings2
-                        className={`w-6 h-6 rounded-full ml-1 text-white `}
-                      />
-                      Custom
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center">
+                        <Settings2 className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="font-medium">Custom Game</span>
                     </div>
                   </SelectItem>
                 </SelectContent>
@@ -249,13 +271,20 @@ function Page() {
             </div>
 
             {/* Calculate Button */}
-            <div className="flex justify-center">
+            <div className="pt-6 border-t border-border/50">
+              <div className="text-center mb-6">
+                <h4 className="text-lg font-semibold text-foreground mb-2">Ready to Calculate?</h4>
+                <p className="text-sm text-muted-foreground">Run advanced Monte Carlo simulation to get your probability</p>
+              </div>
               <Button
                 disabled={!validateForm()}
                 onClick={handleCalculate}
-                className="w-full py-6 text-lg text-white border cursor-pointer bg-sky-600 border-sky-500/50 hover:bg-sky-700"
+                className="w-full py-6 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Calculate
+                <span className="flex items-center justify-center gap-2">
+                  Calculate Probability
+                  <span className="text-sm opacity-80">✨</span>
+                </span>
               </Button>
             </div>
           </CardContent>
@@ -263,18 +292,20 @@ function Page() {
 
             {/* Results Section */}
             {successRate >= 0 && (
-              <SimulationResultsCard
-                characterCopies={formData.characterCopies}
-                gameTerms={selectedGame.gameTerms}
-                numSimulations={formData.numSimulations}
-                totalPulls={
-                  formData.pulls + Math.floor(formData.currency / conversionRate)
-                }
-                pulls={formData.pulls}
-                currencyPulls={Math.floor(formData.currency / conversionRate)}
-                successRate={successRate}
-                weaponCopies={formData.weaponCopies}
-              />
+              <div id="results-section">
+                <SimulationResultsCard
+                  characterCopies={formData.characterCopies}
+                  gameTerms={selectedGame.gameTerms}
+                  numSimulations={formData.numSimulations}
+                  totalPulls={
+                    formData.pulls + Math.floor(formData.currency / conversionRate)
+                  }
+                  pulls={formData.pulls}
+                  currencyPulls={Math.floor(formData.currency / conversionRate)}
+                  successRate={successRate}
+                  weaponCopies={formData.weaponCopies}
+                />
+              </div>
             )}
           </div>
         </section>

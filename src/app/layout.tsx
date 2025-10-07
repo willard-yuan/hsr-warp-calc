@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   title: "HSR Warp Calculator - Honkai Star Rail, Zenless Zone Zero, Genshin Impact",
   description:
     "Calculate Your Chances of Getting Characters and Weapons in Honkai Star Rail, Zenless Zone Zero, and Genshin Impact with Our Advanced Warp Calculator.",
+  keywords: [
+    "HSR Warp Calculator",
+    "Honkai Star Rail Calculator",
+    "Zenless Zone Zero Calculator", 
+    "Genshin Impact Calculator"
+  ],
   alternates: {
     canonical: "https://hsr-warp-calculator.pro",
   },

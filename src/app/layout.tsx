@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Warp Calculator - Honkai: Star Rail, Genshin, ZZZ, and More",
   description:
     "A comprehensive Gacha pull Calculator for HoYoverse games. Simulate pulls/wishes/warps and calculate your odds of getting characters, weapons/light cones in Honkai: Star Rail, Genshin Impact, and Zenless Zone Zero. Features accurate pity system modeling, 50/50 mechanics, and detailed success rate analysis for optimal wishing strategies.",
+  alternates: {
+    canonical: "https://hsr-warp-calculator.pro",
+  },
 };
 
 export default function RootLayout({

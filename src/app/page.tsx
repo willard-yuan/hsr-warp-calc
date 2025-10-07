@@ -25,6 +25,11 @@ import {
 } from "@/lib/simulator";
 import { useSearchParams } from "next/navigation";
 import CustomGameSettingsCard from "@/components/CustomGameSettingsCard";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import HowTo from "@/components/HowTo";
+import UserReviews from "@/components/UserReviews";
+import Footer from "@/components/Footer";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -115,23 +120,18 @@ function Page() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="container max-w-3xl p-6 mx-auto space-y-8">
-        {/* Header */}
-        {/* <div className="py-8 space-y-4 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold text-transparent bg-gradient-to-r from-white to-slate-300 bg-clip-text">
-              Gacha Pull Calculator
-            </h1>
-          </div>
-          <p className="max-w-2xl mx-auto text-xl text-slate-400">
-            Calculate your pull requirements and optimize your resource planning
-            across multiple gacha games
-          </p>
-        </div> */}
-
-        {/* Main Card */}
-        <Card className="shadow-2xl bg-slate-900/50 border-slate-700/50 backdrop-blur-xl">
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <Navbar />
+      
+      {/* Hero Section */}
+      <Hero />
+      
+      {/* Calculator Section */}
+      <section id="calculator" className="py-20 bg-gradient-to-b from-background to-muted/20">
+        <div className="container max-w-3xl p-6 mx-auto space-y-8">
+          {/* Main Card */}
+          <Card className="shadow-2xl bg-card/50 border-border backdrop-blur-xl">
           <CardContent className="space-y-8">
             {/* Game Selection */}
             <div className="space-y-3 ">
@@ -261,24 +261,34 @@ function Page() {
           </CardContent>
         </Card>
 
-        {/* Results Section */}
-        {successRate >= 0 && (
-          <SimulationResultsCard
-            characterCopies={formData.characterCopies}
-            gameTerms={selectedGame.gameTerms}
-            numSimulations={formData.numSimulations}
-            totalPulls={
-              formData.pulls + Math.floor(formData.currency / conversionRate)
-            }
-            pulls={formData.pulls}
-            currencyPulls={Math.floor(formData.currency / conversionRate)}
-            successRate={successRate}
-            weaponCopies={formData.weaponCopies}
-          />
-        )}
+            {/* Results Section */}
+            {successRate >= 0 && (
+              <SimulationResultsCard
+                characterCopies={formData.characterCopies}
+                gameTerms={selectedGame.gameTerms}
+                numSimulations={formData.numSimulations}
+                totalPulls={
+                  formData.pulls + Math.floor(formData.currency / conversionRate)
+                }
+                pulls={formData.pulls}
+                currencyPulls={Math.floor(formData.currency / conversionRate)}
+                successRate={successRate}
+                weaponCopies={formData.weaponCopies}
+              />
+            )}
+          </div>
+        </section>
+        
+        {/* How To Section */}
+        <HowTo />
+        
+        {/* User Reviews Section */}
+        <UserReviews />
+        
+        {/* Footer Section */}
+        <Footer />
       </div>
-    </div>
-  );
+    );
 }
 
 export default function page() {

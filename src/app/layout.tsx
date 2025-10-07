@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import Links from "@/components/Links";
 import { Analytics } from "@vercel/analytics/react";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const font = Rubik({ subsets: ["latin"] });
 
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={font.className}>
         {/* Google tag (gtag.js) */}
         <Script
@@ -49,8 +50,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></Script>
         <Analytics />
-        {children}
-        <Links />
+        <ThemeProvider>
+          {children}
+          <Links />
+        </ThemeProvider>
       </body>
     </html>
   );

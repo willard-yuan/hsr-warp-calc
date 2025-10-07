@@ -138,7 +138,7 @@ export default function ChangelogPage() {
                   </div>
                 </div>
                 <CardTitle className="text-2xl font-bold text-foreground mt-2">
-                  {version.title}
+                  <h2 className="text-2xl font-bold">{version.title}</h2>
                 </CardTitle>
                 <p className="text-muted-foreground">
                   {version.description}

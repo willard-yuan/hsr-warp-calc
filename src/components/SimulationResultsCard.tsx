@@ -46,7 +46,7 @@ export default function SimulationResultsCard({
       <CardHeader className="space-y-2">
         <CardTitle className="flex items-center gap-3 text-white text-xl font-semibold">
           <TrendingUp className="w-6 h-6 text-green-400" />
-          Simulation Results
+          <h2 className="text-xl font-semibold">Simulation Results</h2>
         </CardTitle>
         <CardDescription className="text-slate-300 leading-relaxed">
           Ran <strong>{numSimulations.toLocaleString()}</strong> simulations,

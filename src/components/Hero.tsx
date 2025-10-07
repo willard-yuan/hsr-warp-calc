@@ -75,12 +75,12 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-up delay-400">
+          <h2 className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-up delay-400 font-normal">
             Advanced probability calculator for{' '}
             <span className="text-primary font-semibold">Honkai Star Rail</span>,{' '}
             <span className="text-purple-400 font-semibold">Zenless Zone Zero</span>, and{' '}
             <span className="text-blue-400 font-semibold">Genshin Impact</span>
-          </p>
+          </h2>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up delay-600">

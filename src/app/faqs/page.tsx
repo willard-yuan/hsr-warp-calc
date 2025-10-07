@@ -152,7 +152,7 @@ export default function FAQsPage() {
               <CardHeader className="pb-4">
                 <CardTitle className="text-2xl font-bold text-foreground flex items-center space-x-3">
                   <category.icon className={`w-6 h-6 ${category.color}`} />
-                  <span>{category.category}</span>
+                  <h2 className="text-2xl font-bold">{category.category}</h2>
                 </CardTitle>
               </CardHeader>
               

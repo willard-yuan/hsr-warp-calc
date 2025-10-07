@@ -8,9 +8,9 @@ import { Analytics } from "@vercel/analytics/react";
 const font = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Warp Calculator - Honkai: Star Rail, Genshin, ZZZ, and More",
+  title: "HSR Warp Calculator - Honkai Star Rail, Zenless Zone Zero, Genshin Impact",
   description:
-    "A comprehensive Gacha pull Calculator for HoYoverse games. Simulate pulls/wishes/warps and calculate your odds of getting characters, weapons/light cones in Honkai: Star Rail, Genshin Impact, and Zenless Zone Zero. Features accurate pity system modeling, 50/50 mechanics, and detailed success rate analysis for optimal wishing strategies.",
+    "Calculate Your Chances of Getting Characters and Weapons in Honkai Star Rail, Zenless Zone Zero, and Genshin Impact with Our Advanced Warp Calculator.",
   alternates: {
     canonical: "https://hsr-warp-calculator.pro",
   },

@@ -70,11 +70,7 @@ export default function RootLayout({
             gtag('config', 'G-RBP94WC1RV');
           `}
         </Script>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2934132820353961"
-          crossOrigin="anonymous"
-        ></Script>
+
         <Analytics />
         <ThemeProvider>
           {children}

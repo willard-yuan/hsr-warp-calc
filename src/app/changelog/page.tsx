@@ -12,6 +12,54 @@ import Footer from '@/components/Footer';
 export default function ChangelogPage() {
   const versions = [
     {
+      version: "1.0.5",
+      date: "2025-10-09",
+      type: "minor",
+      title: "Social Media Sharing Enhancement",
+      description: "Added comprehensive social media sharing functionality for simulation results",
+      changes: [
+        {
+          category: "🚀 New Features",
+          items: [
+            "Added social media sharing dropdown menu for simulation results",
+            "Implemented sharing to X (Twitter) with formatted content",
+            "Added Facebook sharing with custom post content",
+            "Integrated Reddit sharing with subreddit-friendly formatting",
+            "Enhanced copy-to-clipboard functionality with visual feedback"
+          ]
+        },
+        {
+          category: "🎨 UI/UX Improvements",
+          items: [
+            "Redesigned Share Results button with dropdown menu",
+            "Added platform-specific icons (Twitter, Facebook, Reddit)",
+            "Implemented smooth animations and hover effects for sharing options",
+            "Added click-outside-to-close functionality for better user experience",
+            "Enhanced button styling with gradient backgrounds and 3D effects"
+          ]
+        },
+        {
+          category: "🔧 Technical Enhancements",
+          items: [
+            "Intelligent content generation based on simulation results",
+            "Dynamic URL sharing with proper encoding",
+            "Responsive sharing menu design for all device sizes",
+            "Added proper event handling for social media platform APIs",
+            "Optimized sharing content for each platform's character limits"
+          ]
+        },
+        {
+          category: "📊 Content Features",
+          items: [
+            "Auto-generated sharing text with success rates and pull counts",
+            "Platform-optimized hashtags and formatting",
+            "Contextual sharing messages based on simulation outcomes",
+            "Professional sharing templates for different social platforms"
+          ]
+        }
+      ]
+    },
+    {
       version: "1.0.0",
       date: "2025-10-07",
       type: "major",
@@ -106,7 +154,7 @@ export default function ChangelogPage() {
             </Link>
           </div>
           
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                 Changelog

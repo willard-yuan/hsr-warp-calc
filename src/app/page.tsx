@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/select";
 import BannerSettingsCard from "@/components/BannerSettingsCard";
 import SimulationSettingsCard from "@/components/SimulationSettingsCard";
-import SimulationResultsCard from "@/components/SimulationResultsCard";
 import { CUSTOM_GAME, GAMES, IGame } from "@/lib/games";
 import { useForm } from "@/hooks/useForm";
 import { Settings2, Sword, User } from "lucide-react";
@@ -23,7 +22,7 @@ import {
   ISimulatorInput,
   Simulator,
 } from "@/lib/simulator";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import CustomGameSettingsCard from "@/components/CustomGameSettingsCard";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -33,6 +32,7 @@ import Footer from "@/components/Footer";
 
 function Page() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const gameId = searchParams.get("game");
 
   const [selectedGame, setSelectedGame] = useState<IGame>(
@@ -42,8 +42,6 @@ function Page() {
 
   const [customSimulationSettings, setCustomSimulationSettings] =
     useState<ISimulatorGameSettings>(CUSTOM_GAME.simulationSettings);
-
-  const [successRate, setSuccessRate] = useState(-1);
 
   const [formData, updateForm] = useForm<ISimulatorInput>({
     characterCopies: 0,
@@ -58,7 +56,6 @@ function Page() {
   });
 
   function updateFormData(key: keyof ISimulatorInput, value: number | boolean) {
-    setSuccessRate(-1);
     updateForm(key, value);
   }
 
@@ -66,8 +63,6 @@ function Page() {
     const url = new URL(window.location.href);
     url.searchParams.set("game", gameId); // Change or add the 'page' param
     window.history.pushState({}, "", url); // Update the URL without reloading
-
-    setSuccessRate(-1);
 
     if (gameId === "custom") setSelectedGame(CUSTOM_GAME);
     else setSelectedGame(GAMES.find((game) => game.id === gameId)!);
@@ -91,18 +86,38 @@ function Page() {
       weaponCopies: formData.weaponCopies,
       weaponPity: formData.weaponPity,
     });
-    setSuccessRate(res);
 
-    // Scroll to the results section after calculation
-    setTimeout(() => {
-      const resultsElement = document.getElementById('results-section');
-      if (resultsElement) {
-        resultsElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    }, 100);
+    // 准备传递给结果页面的数据
+    const simulationData = {
+      // 计算结果
+      characterCopies: formData.characterCopies,
+      numSimulations: formData.numSimulations,
+      totalPulls: formData.pulls + Math.floor(formData.currency / conversionRate),
+      pulls: formData.pulls,
+      currencyPulls: Math.floor(formData.currency / conversionRate),
+      successRate: res,
+      weaponCopies: formData.weaponCopies,
+      gameId: selectedGame.id,
+      
+      // 计算参数 - Settings
+      currency: formData.currency,
+      conversionRate: conversionRate,
+      
+      // 计算参数 - Character Banner
+      characterPity: formData.characterPity,
+      isCharacterGuaranteed: formData.isCharacterGuaranteed,
+      
+      // 计算参数 - Weapon Banner
+      weaponPity: formData.weaponPity,
+      isWeaponGuaranteed: formData.isWeaponGuaranteed,
+      
+      // 游戏设置（用于自定义游戏）
+      customSimulationSettings: selectedGame.id === "custom" ? customSimulationSettings : null
+    };
+
+    // 将数据编码为 URL 参数并跳转到结果页面
+    const dataParam = encodeURIComponent(JSON.stringify(simulationData));
+    router.push(`/simulation_results?data=${dataParam}`);
   }
 
   const conversionRate =
@@ -290,23 +305,7 @@ function Page() {
           </CardContent>
         </Card>
 
-            {/* Results Section */}
-            {successRate >= 0 && (
-              <div id="results-section">
-                <SimulationResultsCard
-                  characterCopies={formData.characterCopies}
-                  gameTerms={selectedGame.gameTerms}
-                  numSimulations={formData.numSimulations}
-                  totalPulls={
-                    formData.pulls + Math.floor(formData.currency / conversionRate)
-                  }
-                  pulls={formData.pulls}
-                  currencyPulls={Math.floor(formData.currency / conversionRate)}
-                  successRate={successRate}
-                  weaponCopies={formData.weaponCopies}
-                />
-              </div>
-            )}
+
           </div>
         </section>
         

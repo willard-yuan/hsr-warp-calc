@@ -131,7 +131,7 @@ export default function FAQsPage() {
             </Link>
           </div>
           
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                 Frequently Asked Questions

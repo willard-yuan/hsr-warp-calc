@@ -289,7 +289,7 @@ function SimulationResultsContent() {
           <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center">
             {/* Calculate Again Button */}
             <Button 
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/#calculator')}
               size="lg"
               className="group relative overflow-hidden bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 text-white font-semibold px-8 py-4 rounded-xl shadow-2xl hover:shadow-primary/25 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 border-0"
             >

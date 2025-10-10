@@ -44,13 +44,13 @@ function Page() {
     useState<ISimulatorGameSettings>(CUSTOM_GAME.simulationSettings);
 
   const [formData, updateForm] = useForm<ISimulatorInput>({
-    characterCopies: 0,
+    characterCopies: 1,
     characterPity: 0,
     isCharacterGuaranteed: false,
     isWeaponGuaranteed: false,
     numSimulations: 10000,
-    pulls: 0,
-    currency: 0,
+    pulls: 100,
+    currency: 1600,
     weaponCopies: 0,
     weaponPity: 0,
   });
